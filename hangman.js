@@ -65,7 +65,7 @@ Hangman.prototype.statusMessage = function () {
     return this.message = `Guesses left: ${this.possibleGuesses}`
   } else if (this.status === 'failed') {
     return this.message = `Nice try! The word was '${this.word.join('')}!'`
-  } else if (this.status === 'finished') {
+  } else {
     return this.message = `Great work! You guessed the word`
   }
 }
