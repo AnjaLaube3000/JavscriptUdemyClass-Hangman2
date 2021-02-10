@@ -12,13 +12,11 @@ const messageEl = document.querySelector('#message')
 const game1 = new Hangman("playground", 5)
 
 puzzleEl.textContent = game1.getPuzzle()
-messageEl.textContent = game1.statusMessage()
-console.log(game1.checkStatus())
+messageEl.textContent = game1.statusMessage((
 
 window.addEventListener('keypress', function (e) {
   const guess = String.fromCharCode(e.charCode)
   game1.makeGuess(guess)
   puzzleEl.textContent = game1.getPuzzle()
   messageEl.textContent = game1.statusMessage()
-  console.log(game1.checkStatus())
 })
