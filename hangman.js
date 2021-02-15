@@ -1,3 +1,6 @@
+// 1 convert getSttusMessage to a getter
+// 2 convert getPuzzle in a getter
+// 3 change usage in app
 
 class Hangman {
   constructor(word, remainingGuesses) {
@@ -8,7 +11,7 @@ class Hangman {
     this.message = "Good luck!"
   }
   calculateStatus() {
-    const finished = this.word.every((letter) => this.guessedLetters.includes(letter))
+    const finished = this.word.every((letter) => this.guessedLetters.includes(letter || letter === ' '))
 
     if (this.remainingGuesses === 0) {
       this.status = 'failed'
@@ -18,9 +21,8 @@ class Hangman {
       this.status = 'playing'
     }
   }
-  getPuzzle() {
+  get puzzle() {
     let puzzle = ''
-
     this.word.forEach((letter) => {
       if (this.guessedLetters.includes(letter) || letter === ' ') {
         puzzle += letter
@@ -28,9 +30,9 @@ class Hangman {
         puzzle += '*'
       }
     })
-
     return puzzle
   }
+
   makeGuess(guess) {
     guess = guess.toLowerCase()
     const isUnique = !this.guessedLetters.includes(guess)
@@ -55,7 +57,7 @@ class Hangman {
       return this.status = 'playing'
     }
   }
-  statusMessage() {
+  get statusMessage() {
     if (this.status === "playing") {
       return this.message = `Guesses left: ${this.remainingGuesses}`
     } else if (this.status === 'failed') {
