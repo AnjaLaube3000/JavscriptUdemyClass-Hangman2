@@ -13,18 +13,15 @@ window.addEventListener('keypress', function (e) {
   messageEl.textContent = game1.statusMessage
 })
 
-getPuzzle('3', (error, puzzle) => {
-  if (error) {
-    console.log(`Error: ${error}`)
-  } else {
-    console.log(puzzle)
-  }
+getPuzzle('3').then((puzzle) => {
+  console.log(puzzle)
+}, (error) => {
+  console.log(`Error: ${error}`)
 })
 
-getCountryCode('DE', (error, request) => {
-  if (error) {
-    console.log(`Error: ${erros}`)
-  } else {
-    console.log(request)
-  }
+getCountryCode('DE').then((request) => {
+  console.log(request.name)
+}, (error) => {
+  console.log(`Error" ${error}`)
 })
+
