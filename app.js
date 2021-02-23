@@ -13,38 +13,30 @@ window.addEventListener('keypress', function (e) {
   messageEl.textContent = game1.statusMessage
 })
 
-
-// Making an HTTP Request
-
-// const request = new XMLHttpRequest()
-
-// request.addEventListener('readystatechange', (e) => {
-//   if (e.target.readyState === 4 && e.target.status === 200) {
-//     const data = JSON.parse(e.target.responseText)
-//     console.log(data)
-//   } else if (e.target.readyState === 4) {
-//     console.log('An error has taken place.')
-//   }
-// })
-
-
-// Make a new request for all countries
-// Parse the responseText to get back the array of objects
-// Find your country object by it's country code(alpha2Code property)
-// Print the full country name (name property)
-const countryRequest = new XMLHttpRequest()
-
-const countryCode = 'DE'
-
-countryRequest.addEventListener('readystatechange', (e) => {
-  if (e.target.readyState === 4 && e.target.status === 200) {
-    const data = JSON.parse(e.target.responseText)
-    const match = data.find((match) => match.alpha2Code === countryCode)
-    console.log(match.name)
-  } else if (e.target.readyState === 4) {
-    console.log('An error has taken place.')
-  }
+getPuzzle('3').then((puzzle) => {
+  console.log(puzzle)
+}).catch((error) => {
+    console.log(`Error: ${error}`)
 })
 
-countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
-countryRequest.send()
+// getCountryCode('DE').then((match) => {
+//   console.log(match.name)
+// }).catch((error) => {
+//   console.log(`Error" ${error}`)
+// })
+
+// 3. Use getLocation to print a little message using the city, county and country
+// getLocation().then((data) => {
+//   console.log(`This ip address is registered for ${data.city}, ${data.region} in ${data.country}.`)
+// }).catch((err) => {
+//   console.log(`Sorry. An error occured: ${err}`)
+// })
+
+//4. Modify getLocation call to get full country name
+getLocation().then((data) => {
+  return getCountryCode(data.country)
+}).then((data) => {
+  console.log(data.name)
+}).catch((err) => {
+  console.log(`Sorry. An error occured: ${err}`)
+})
