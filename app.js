@@ -16,12 +16,27 @@ window.addEventListener('keypress', function (e) {
 getPuzzle('3').then((puzzle) => {
   console.log(puzzle)
 }).catch((error) => {
-  console.log(`Error: ${error}`)
+    console.log(`Error: ${error}`)
 })
 
-getCountryCode('DE').then((request) => {
-  console.log(request.name)
-}, (error) => {
-  console.log(`Error" ${error}`)
-})
+// getCountryCode('DE').then((match) => {
+//   console.log(match.name)
+// }).catch((error) => {
+//   console.log(`Error" ${error}`)
+// })
 
+// 3. Use getLocation to print a little message using the city, county and country
+// getLocation().then((data) => {
+//   console.log(`This ip address is registered for ${data.city}, ${data.region} in ${data.country}.`)
+// }).catch((err) => {
+//   console.log(`Sorry. An error occured: ${err}`)
+// })
+
+//4. Modify getLocation call to get full country name
+getLocation().then((data) => {
+  return getCountryCode(data.country)
+}).then((data) => {
+  console.log(data.name)
+}).catch((err) => {
+  console.log(`Sorry. An error occured: ${err}`)
+})

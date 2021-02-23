@@ -12,21 +12,31 @@ const getPuzzle = (wordCount) => {
 }
 
 // HTTP Request for countryCode
-const getCountryCode = (countryCode) => new Promise((resolve, reject) => {
-  const countryRequest = new XMLHttpRequest()
-
-  countryRequest.addEventListener('readystatechange', (e) => {
-  if (e.target.readyState === 4 && e.target.status === 200) {
-      const data = JSON.parse(e.target.responseText)
-      const match = data.find((match) => match.alpha2Code === countryCode)
-      resolve(match)
-    } else if (e.target.readyState === 4) {
-      reject('An error has taken place.')
+const getCountryCode = (countryCode) => {
+  return fetch('http://restcountries.eu/rest/v2/all').then((response) => {
+    if (response.status === 200) {
+      return response.json()
+    } else {
+      throw new Error("Unable to fetch the right country code.")
     }
+  }).then((data) => {
+    const match = data.find((match) => match.alpha2Code === countryCode)
+    return match
   })
+}
 
-  countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
-  countryRequest.send()
-})
+
+// HTTP Request Challange
+const getLocation = () => {
+  return fetch('https://www.ipinfo.io/json?token=95d19ebd923c25').then((response) => {
+    if (response.status === 200) {
+      return response.json()
+    } else {
+      throw new Error("Can't fetch the data you requested.")
+    }
+  }).then((data) => {
+    return data
+  })
+}
 
 
