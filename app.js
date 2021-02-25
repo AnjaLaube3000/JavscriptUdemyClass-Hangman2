@@ -1,23 +1,39 @@
 const puzzleEl = document.querySelector('#puzzle')
 const guessesEl = document.querySelector('#guesses')
-const messageEl = document.querySelector('#message')
-const game1 = new Hangman("Radl fahren", 5)
-
-puzzleEl.textContent = game1.puzzle
-messageEl.textContent = game1.statusMessage
+let game1
 
 window.addEventListener('keypress', function (e) {
   const guess = String.fromCharCode(e.charCode)
   game1.makeGuess(guess)
-  puzzleEl.textContent = game1.puzzle
-  messageEl.textContent = game1.statusMessage
+  render()
 })
 
-getPuzzle('3').then((puzzle) => {
-  console.log(puzzle)
-}).catch((error) => {
-    console.log(`Error: ${error}`)
-})
+const render = () => {
+  puzzleEl.textContent = game1.puzzle
+  guessesEl.textContent = game1.statusMessage
+}
+
+const startGame = async () => {
+  const puzzle = await getPuzzle('2')
+  game1 = new Hangman(puzzle, 5)
+  render()
+}
+
+document.querySelector('#reset').addEventListener('click', startGame)
+
+startGame()
+
+// getPuzzle('2').then((puzzle) => {
+//   console.log(puzzle)
+// }).catch((error) => {
+//     console.log(`Error: ${error}`)
+// })
+
+// getCurrentCountry().then((country) =>{
+//   console.log(country.name)
+// }).catch((error) => {
+//   console.log('Error:', error)
+// })
 
 // getCountryCode('DE').then((match) => {
 //   console.log(match.name)
@@ -33,10 +49,10 @@ getPuzzle('3').then((puzzle) => {
 // })
 
 //4. Modify getLocation call to get full country name
-getLocation().then((data) => {
-  return getCountryCode(data.country)
-}).then((data) => {
-  console.log(data.name)
-}).catch((err) => {
-  console.log(`Sorry. An error occured: ${err}`)
-})
+// getLocation().then((data) => {
+//   return getCountryCode(data.country)
+// }).then((data) => {
+//   console.log(data.name)
+// }).catch((err) => {
+//   console.log(`Sorry. An error occured: ${err}`)
+// })
