@@ -13,10 +13,16 @@ window.addEventListener('keypress', function (e) {
   messageEl.textContent = game1.statusMessage
 })
 
-getPuzzle('3').then((puzzle) => {
+getPuzzle('2').then((puzzle) => {
   console.log(puzzle)
 }).catch((error) => {
     console.log(`Error: ${error}`)
+})
+
+getCurrentCountry().then((country) =>{
+  console.log(country.name)
+}).catch((error) => {
+  console.log('Error:', error)
 })
 
 // getCountryCode('DE').then((match) => {
@@ -33,10 +39,10 @@ getPuzzle('3').then((puzzle) => {
 // })
 
 //4. Modify getLocation call to get full country name
-getLocation().then((data) => {
-  return getCountryCode(data.country)
-}).then((data) => {
-  console.log(data.name)
-}).catch((err) => {
-  console.log(`Sorry. An error occured: ${err}`)
-})
+// getLocation().then((data) => {
+//   return getCountryCode(data.country)
+// }).then((data) => {
+//   console.log(data.name)
+// }).catch((err) => {
+//   console.log(`Sorry. An error occured: ${err}`)
+// })
