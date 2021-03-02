@@ -1,6 +1,6 @@
 // Making an HTTP Request
 const getPuzzle = async (wordCount) => {
-  const response = await fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+  const response = await fetch(`//puzzle.mead.io/puzzle?wordCount=${wordCount}`)
   if (response.status === 200) {
     const data = await response.json()
     return data.puzzle
@@ -9,11 +9,9 @@ const getPuzzle = async (wordCount) => {
   }
 }
 
-
-
 // HTTP Request for countryCode - AsyncAwait
 const getCountryCode = async (countryCode) => {
-  const response = await fetch('http://restcountries.eu/rest/v2/all')
+  const response = await fetch('//restcountries.eu/rest/v2/all')
   if (response.status === 200) {
     const data = await response.json()
     const match = data.find((match) => match.alpha2Code === countryCode)
@@ -25,7 +23,7 @@ const getCountryCode = async (countryCode) => {
 
 // HTTP Request Challange - asyncAwait
 const getLocation = async () => {
-  const response = await fetch('https://www.ipinfo.io/json?token=95d19ebd923c25')
+  const response = await fetch('//www.ipinfo.io/json?token=95d19ebd923c25')
   if (response.status === 200) {
     const data = await response.json()
     return data
@@ -41,26 +39,4 @@ const getCurrentCountry = async () => {
   return country
 
 }
-
-// getLocation().then((data) => {
-//   return getCountryCode(data.country)
-// }).then((data) => {
-//   console.log(data.name)
-// }).catch((err) => {
-//   console.log(`Sorry. An error occured: ${err}`)
-// })
-
-// OLD way of writing Promises
-// const getLocation = () => {
-//   return fetch('https://www.ipinfo.io/json?token=95d19ebd923c25').then((response) => {
-//     if (response.status === 200) {
-//       return response.json()
-//     } else {
-//       throw new Error("Can't fetch the data you requested.")
-//     }
-//   }).then((data) => {
-//     return data
-//   })
-// }
-
 
