@@ -29,13 +29,14 @@ class Hangman {
     return puzzle
   }
 
+
   makeGuess(guess) {
     guess = guess.toLowerCase()
     const isUnique = !this.guessedLetters.includes(guess)
     const isBadGuess = !this.word.includes(guess)
 
     if (isUnique) {
-      this.guessedLetters.push(guess)
+      this.guessedLetters = [...this.guessedLetters, guess]
     }
 
     if (isUnique && isBadGuess) {
@@ -44,6 +45,9 @@ class Hangman {
 
     this.calculateStatus()
   }
+
+
+
   checkStatus() {
     if (this.remainingGuesses === 0) {
       return this.status = 'failed'
@@ -66,3 +70,7 @@ class Hangman {
 
 
 export { Hangman as default }
+
+
+
+
